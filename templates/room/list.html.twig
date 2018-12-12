@@ -1,0 +1,49 @@
+{# templates/room/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}room{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Справочник rooms</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Building</th>       
+      <th scope="col">Memo</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+{% for room in rooms %}
+    <tr>
+      <th scope="row">{{ room.id }}</th>
+      <td><a href="{{ url('room_edit',{'id': room.id}) }}" class="db-list-edit"> {{ room.name }}</a></td>
+      <td>{{ room.buildingid }}</td>
+      <td>{{ room.memo }}</td>
+      <td><a href="{{ url('room_delete',{'id': room.id}) }} " class="db-list-edit" onclick="return confirm(' {{ room.name }} будет удалено, продолжить?')">Удалить {{ room.name }}</a></td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+<h3 class="text-center">Добавить</h3>
+{{ render(controller('App\\Controller\\RoomController::newAction')) }} 
+{% endblock %}

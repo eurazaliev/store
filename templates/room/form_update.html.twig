@@ -1,0 +1,63 @@
+{# src/templates/room/form_update.html.twig #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}room{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Редактирование {{name}}</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+
+<div class="container h-50">
+<div class="row h-50 justify-content-center align-items-center">
+<div class="col-sm-12 blog-main justify-content-center align-items-center">
+{{ form_start(form, { 'action': path('room_edit',{'id': id}), 'method': 'POST', 'attr': {'class': 'room'} }) }}
+
+{#    {{ form_widget(form) }} #}
+<div class="col-md-12">
+    <div class="form-group row">
+    <div class="form-group">
+            {{ form_row(form.name) }}
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <div class="form-group">
+            {{ form_row(form.permit) }}
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <div class="form-group">
+            {{ form_row(form.country_id) }}
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <div class="form-group">
+            {{ form_row(form.memo) }}
+    </div>
+    </div>
+
+    <div class="form-row justify-content-center">
+    <div class="form-group text-center">
+        <input type="submit" value="Редактировать">
+    </div>
+    </div>
+</div>{{ form_end(form) }} 
+</div>
+</div>
+</div>
+{% endblock %}

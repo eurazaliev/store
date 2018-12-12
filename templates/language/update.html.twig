@@ -1,0 +1,36 @@
+{# templates/language/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Страны{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Редактировать</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Sanctions</th>
+      <th scope="col">Memo</th>
+    </tr>
+  </thead>
+
+{% for language in countries %}
+     <br>
+     <br>
+    <tr>
+      <th scope="row">{{ language.id }}</th>
+      <td>{{ language.name }}</td>
+      <td>{{ language.sactions }}</td>
+      <td>{{ language.memo }}</td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+{% endblock %}

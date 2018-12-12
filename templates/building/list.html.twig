@@ -1,0 +1,47 @@
+{# templates/language/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Языки{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Справочник buildings</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Memo</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+{% for building in buildings %}
+    <tr>
+      <th scope="row">{{ building.id }}</th>
+      <td><a href="{{ url('building_edit',{'id': building.id}) }}" class="db-list-edit"> {{ building.name }}</a></td>
+      <td>{{ building.memo }}</td>
+      <td><a href="{{ url('building_delete',{'id': building.id}) }}" class="db-list-edit" onclick="return confirm(' {{ building.name }} будет удалено, продолжить?')">Удалить {{ building.name }}</a></td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+<h3 class="text-center">Добавить</h3>
+{{ render(controller('App\\Controller\\BuildingController::newAction')) }} 
+{% endblock %}

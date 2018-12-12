@@ -1,0 +1,63 @@
+{# templates/server/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}server{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Справочник servers</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">VM?</th>
+      <th scope="col">Mem, GB</th>      
+      <th scope="col">Cores</th>       
+      <th scope="col">HDD, Gb</th>      
+      <th scope="col">On/Off</th>
+      <th scope="col">IP</th>      
+      <th scope="col">Cluster</th>
+      <th scope="col">OS</th>       
+      <th scope="col">Memo</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+{% for server in servers %}
+    <tr>
+      <th scope="row">{{ server.id }}</th>
+      <td><a href="{{ url('server_edit',{'id': server.id}) }}" class="db-list-edit"> {{ server.name }}</a></td>
+      <td>{{ server.isvm }}</td>
+      <td>{{ server.mem }}</td>
+      <td>{{ server.cpu }}</td>
+      <td>{{ server.hdd }}</td>
+      <td>{{ server.stateonoff }}</td>
+      <td>{{ server.ipaddr }}</td>
+      <td>{{ server.clusterid }}</td>
+      <td>{{ server.osid }}</td>
+      <td>{{ server.memo }}</td>
+      <td><a href="{{ url('server_delete',{'id': server.id}) }} " class="db-list-edit" onclick="return confirm(' {{ server.name }} будет удалено, продолжить?')">Удалить {{ server.name }}</a></td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+<h3 class="text-center">Добавить</h3>
+{{ render(controller('App\\Controller\\ServerController::newAction')) }} 
+{% endblock %}

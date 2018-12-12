@@ -1,0 +1,47 @@
+{# templates/platform/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Языки{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Справочник platforms</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Memo</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+{% for platform in platforms %}
+    <tr>
+      <th scope="row">{{ platform.id }}</th>
+      <td><a href="{{ url('platform_edit',{'id': platform.id}) }}" class="db-list-edit"> {{ platform.name }}</a></td>
+      <td>{{ platform.memo }}</td>
+      <td><a href="{{ url('platform_delete',{'id': platform.id}) }}" class="db-list-edit" onclick="return confirm(' {{ platform.name }} будет удалено, продолжить?')">Удалить {{ platform.name }}</a></td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+<h3 class="text-center">Добавить</h3>
+{{ render(controller('App\\Controller\\PlatformController::newAction')) }} 
+{% endblock %}

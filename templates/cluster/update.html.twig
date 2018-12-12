@@ -1,0 +1,34 @@
+{# templates/cluster/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Страны{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Редактировать</h2>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Memo</th>
+    </tr>
+  </thead>
+
+{% for cluster in clusters %}
+     <br>
+     <br>
+    <tr>
+      <th scope="row">{{ cluster.id }}</th>
+      <td>{{ cluster.name }}</td>
+      <td>{{ cluster.memo }}</td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+  <tbody>
+  </tbody>
+</table>
+{% endblock %}

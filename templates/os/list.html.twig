@@ -1,0 +1,55 @@
+{# templates/os/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}os{% endblock %}
+{% block body %}
+<div class="blog-header">
+    <h2 class="blog-title text-center">Справочник ОС</h2>
+</div>
+
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Version</th>
+      <th scope="col">Platform</th>       
+      <th scope="col">Vendor</th>
+      <th scope="col">Language</th>
+      <th scope="col">Memo</th>
+    </tr>
+  </thead>
+
+  <tbody>
+{% for os in oss %}
+    <tr>
+      <th scope="row">{{ os.id }}</th>
+      <td><a href="{{ url('os_edit',{'id': os.id}) }}" class="db-list-edit"> {{ os.name }}</a></td>
+      <td>{{ os.version }}</td>
+      <td>{{ os.platformid }}</td>
+      <td>{{ os.vendorid }}</td>
+      <td>{{ os.languageid }}</td>
+      <td>{{ os.memo }}</td>
+      <td><a href="{{ url('os_delete',{'id': os.id}) }} " class="db-list-edit" onclick="return confirm(' {{ os.name }} {{ os.version }} будет удалено, продолжить?')">Удалить {{ os.name }}</a></td>
+    </tr>
+
+{% else %}
+Записей нет.
+{% endfor %}
+
+  </tbody>
+</table>
+<h3 class="text-center">Добавить</h3>
+{{ render(controller('App\\Controller\\OSController::newAction')) }} 
+{% endblock %}

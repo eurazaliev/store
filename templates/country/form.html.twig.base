@@ -1,0 +1,11 @@
+{# src/templates/views/Country/form.html.twig #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form, { 'action': path('country_create'), 'method': 'POST', 'attr': {'class': 'country'} }) }}
+
+{#    {{ form_widget(form) }} #}
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+
+
