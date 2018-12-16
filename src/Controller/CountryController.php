@@ -18,7 +18,10 @@ class CountryController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$countries = $em->getRepository(Country::class)->findAll();
+        $entity = Country::getEntity();
+	                    
 	return $this->render('country/country_list.html.twig', [
+            'entity' => $entity,
 	    'countries' => $countries
 	]);
     }

@@ -18,7 +18,9 @@ class PlatformController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$platforms = $em->getRepository(Platform::class)->findAll();
+        $entity = Platform::getEntity();
 	return $this->render('platform/list.html.twig', [
+            'entity' => $entity,
 	    'platforms' => $platforms
 	]);
     }

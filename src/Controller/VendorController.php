@@ -18,7 +18,9 @@ class VendorController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$vendors = $em->getRepository(Vendor::class)->findAll();
+        $entity = Vendor::getEntity();
 	return $this->render('vendor/list.html.twig', [
+            'entity' => $entity,
 	    'vendors' => $vendors
 	]);
     }

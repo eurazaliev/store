@@ -43,6 +43,11 @@ class Platform
 	return $this->getName();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Вычислительная платформа'";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -54,6 +54,12 @@ class Vendor
 	return $this->getName();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Производитель(вендор)'";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -18,8 +18,10 @@ class ClusterController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$clusters = $em->getRepository(Cluster::class)->findAll();
+	$entity = Cluster::getEntity();
 	return $this->render('cluster/list.html.twig', [
-	    'clusters' => $clusters
+	    'clusters' => $clusters,
+	    'entity' => $entity
 	]);
     }
 

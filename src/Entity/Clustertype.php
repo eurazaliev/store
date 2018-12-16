@@ -43,6 +43,12 @@ class Clustertype
         $this->clusters = new ArrayCollection();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Тип кластера'";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

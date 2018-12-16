@@ -18,7 +18,9 @@ class OSController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$oss = $em->getRepository(OS::class)->findAll();
+        $entity = OS::getEntity();
 	return $this->render('os/list.html.twig', [
+            'entity' => $entity,
 	    'oss' => $oss
 	]);
     }

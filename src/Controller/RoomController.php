@@ -16,9 +16,11 @@ class RoomController extends Controller
     */
     public function indexAction()
     {
-	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 	$rooms = $em->getRepository(Room::class)->findAll();
+        $entity = Room::getEntity();
 	return $this->render('room/list.html.twig', [
+            'entity' => $entity,
 	    'rooms' => $rooms
 	]);
     }
@@ -27,7 +29,7 @@ class RoomController extends Controller
     {
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
-        return $this->render('room/form.html.twig', array(
+        return $this->render('room/create.html.twig', array(
             'room' => $room,
             'form'   => $form->createView()
         ));
@@ -120,7 +122,7 @@ class RoomController extends Controller
 	    $this->addFlash('danger', $e->getMessage());
     	}
 
-        return $this->render('room/form_update.html.twig', [
+        return $this->render('room/update.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
             'name' => $room->getName()

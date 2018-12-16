@@ -43,6 +43,11 @@ class Project
         $this->clusters = new ArrayCollection();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Проект'";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

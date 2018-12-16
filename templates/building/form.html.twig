@@ -1,11 +1,6 @@
 {# src/templates/building/form.html.twig #}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div class="container h-50">
-<div class="row h-50 justify-content-center align-items-center">
-<div class="col-sm-12 blog-main justify-content-center align-items-center">
-{{ form_start(form, { 'action': path('building_create'), 'method': 'POST', 'attr': {'class': 'building'} }) }}
-
 <div class="col-md-12">
     <div class="form-group row">
     <div class="form-group">
@@ -37,8 +32,3 @@
     </div>
     </div>
 </div>
-{{ form_end(form) }} 
-</div>
-</div>
-</div>
-

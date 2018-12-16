@@ -50,6 +50,13 @@ class Country
     {
 	return $this->getName();
     }
+    
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Страна'";
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;

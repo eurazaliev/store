@@ -37,6 +37,12 @@ class Room
         return $this->id;
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Помещение'";
+    }
+
+
     public function getName(): ?string
     {
         return $this->name;

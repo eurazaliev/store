@@ -66,6 +66,12 @@ class OS
         $this->servers = new ArrayCollection();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Операционная система'";
+    }
+
+
     public function getVersion(): ?string
     {
         return $this->version;

@@ -48,6 +48,11 @@ class Building
 	return $this->getName();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Здания'";
+    }
+
     public function __construct()
     {
         $this->rooms = new ArrayCollection();

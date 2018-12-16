@@ -18,7 +18,9 @@ class LanguageController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$languages = $em->getRepository(Language::class)->findAll();
+        $entity = Language::getEntity();
 	return $this->render('language/list.html.twig', [
+            'entity' => $entity,
 	    'languages' => $languages
 	]);
     }

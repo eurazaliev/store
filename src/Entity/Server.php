@@ -68,6 +68,12 @@ class Server
      */
     private $os_id;
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Сервер'";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

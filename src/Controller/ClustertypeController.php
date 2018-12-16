@@ -18,7 +18,10 @@ class ClustertypeController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$clustertypes = $em->getRepository(Clustertype::class)->findAll();
+        $entity = Clustertype::getEntity();
+                    
 	return $this->render('clustertype/list.html.twig', [
+            'entity' => $entity,
 	    'clustertypes' => $clustertypes
 	]);
     }

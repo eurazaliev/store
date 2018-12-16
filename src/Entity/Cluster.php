@@ -55,6 +55,12 @@ class Cluster
         $this->servers = new ArrayCollection();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Кластеры'";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

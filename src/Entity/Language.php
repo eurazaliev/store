@@ -43,6 +43,11 @@ class Language
 	return $this->getName();
     }
 
+    static function getEntity(): ?string
+    {
+        return "Справочник 'Язык'";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

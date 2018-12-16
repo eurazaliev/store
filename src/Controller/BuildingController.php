@@ -18,7 +18,10 @@ class BuildingController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$buildings = $em->getRepository(Building::class)->findAll();
+        $entity = Building::getEntity();
+	                    
 	return $this->render('building/list.html.twig', [
+            'entity' => $entity,
 	    'buildings' => $buildings
 	]);
     }
@@ -27,7 +30,7 @@ class BuildingController extends Controller
     {
         $building = new Building();
         $form = $this->createForm(BuildingType::class, $building);
-        return $this->render('building/form.html.twig', array(
+        return $this->render('building/create.html.twig', array(
             'building' => $building,
             'form'   => $form->createView()
         ));
@@ -120,7 +123,7 @@ class BuildingController extends Controller
 	    $this->addFlash('danger', $e->getMessage());
     	}
 
-        return $this->render('building/form_update.html.twig', [
+        return $this->render('building/update.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
             'name' => $building->getName()

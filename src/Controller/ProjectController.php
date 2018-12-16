@@ -18,7 +18,9 @@ class ProjectController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$projects = $em->getRepository(Project::class)->findAll();
+        $entity = Project::getEntity();
 	return $this->render('project/list.html.twig', [
+            'entity' => $entity,
 	    'projects' => $projects
 	]);
     }

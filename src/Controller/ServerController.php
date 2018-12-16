@@ -18,7 +18,9 @@ class ServerController extends Controller
     {
 	$em = $this->getDoctrine()->getManager();
 	$servers = $em->getRepository(Server::class)->findAll();
+        $entity = Server::getEntity();
 	return $this->render('server/list.html.twig', [
+            'entity' => $entity,
 	    'servers' => $servers
 	]);
     }
