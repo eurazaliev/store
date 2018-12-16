@@ -6,7 +6,8 @@
 /var/
 /vendor/
 .env.*
-.*.sh
+.env
+*.sh
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
