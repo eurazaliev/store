@@ -28,6 +28,7 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "codeception/codeception": "*",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "^1.0",
