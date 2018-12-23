@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 git clone http://github.com/eurazaliev/store
 #edit .env
+=======
+#git clone http://github.com/eurazaliev/store
+>>>>>>> 47e8fac5df544a01135cd5c634fba588fa2690fd
 #build application
 composer install
 #install assets (css & js)
@@ -11,4 +15,8 @@ yarn add jquery --dev
 #load fixtures
 ./fixtures.sh
 #
+<<<<<<< HEAD
 echo "ready to dockerize app"
+=======
+echo "ready to dockerize app"
+>>>>>>> 47e8fac5df544a01135cd5c634fba588fa2690fd
