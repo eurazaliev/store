@@ -1,0 +1,1 @@
+bin/console server:start 185.228.234.189:8000
