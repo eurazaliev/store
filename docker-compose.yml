@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+    mariadb:
+        image: mariadb:5.5
+        restart: always
+        volumes:
+            - ./docker/mariadb:/var/lib/mysql
+            - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+
+    nginx:
+        build: ./docker/nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./docker/logs/nginx:/var/log/nginx
+            - ./store:/var/www/store
+        depends_on:
+            - php
+
+    php:
+        build: ./docker/php-fpm
+        image: php:7.2-fpm
+        volumes:
+            - ./store:/var/www/store
