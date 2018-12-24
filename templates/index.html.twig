@@ -2,5 +2,67 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Main page
+<div class="blog-header">
+    <h2 class="blog-title text-center">Main page</h2>
+</div>
+<div class="container">
+<div class="col-6">
+<div class="list-group">
+  <button type="button" class="list-group-item list-group-item-action active">
+    Это демо-тестовое приложение на Symfony. Представляет собой CRUD, функционально - это информационная система для хранения данных  ИТ-актива в части оборудования: 
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Сделана вся эта система на PHP/Symfony 4
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Данные залиты с помощью фикстур
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Верстка простенькая на bootstrap4/twig
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Созданы простенькие acceptance тесты на Codeception
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Исходники на <a href="https://github.com/eurazaliev/store">github тут</a>
+  </button>
+  <button type="button" class="list-group-item list-group-item-action active">
+    Содержит такие сущности как:
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Страны (Country) – используется как справочник для определения принадлежности производителя оборудования и программного обеспечения;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Языки (Language) - используется как справочник для определения языка операционной системы или еще какой-то сущности;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Вендор (Vendor) – справочник производителей, к примеру оборудования или ПО;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Платформы (Platform) – справочник платформ оборудования x86/x64/ARM и вот это вот все;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Операционная система (OS) – названия и версии ОС;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Тип кластера (ClusterType) – тип кластера серверов, это может быть Windows Server Faillover Cluster или KVM HA-кластер;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Кластер (Cluster) – на основе Типа кластера может существовать несколько разных кластеров, объединяющих серверы;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Проект (Project) – справочник проектов, в рамках которых могли быть созданы кластеры: к примеру «проект шардинга БД»;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Здания и кабинеты – справочники для определения расположения серверов, даже если они на хостинге;
+  </button>
+  <button type="button" class="list-group-item list-group-item-action">
+    Серверы -  основной справочник, содержащий данные по существующим серверам: виртуальным и нет, фактически это справочник экземпляров ОС: сервера на linux, windows, какие-то серверы общего назначения.
+  </button>
+</div>
+</div>
+</div>
+
+
+    
 {% endblock %}
