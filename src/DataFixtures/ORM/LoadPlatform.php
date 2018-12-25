@@ -31,7 +31,7 @@ class LoadPlatform extends Fixture
 		$manager->persist($platform3);
 		$manager->flush();		
 
-		$this->addReference('platform', $platform);
+		$this->addReference('platform1', $platform);
 		$this->addReference('platform2', $platform2);
 		$this->addReference('platform3', $platform3);
 

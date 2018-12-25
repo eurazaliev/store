@@ -15,25 +15,122 @@ class LoadServer extends Fixture implements DependentFixtureInterface
 	{
 	echo "Loading ...";
 	}
+       private function createMemo($words = 3)
+        {
+           $minlen = 5;
+           $maxlen = 10;
+           $num = rand(1,$words);
+           $newWord = null;
+           $out = null;
+           $glas = ["a","e","i","y","o","u"];
+           $soglas = ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","x","w","z"];
+
+	   for ($j=0; $j<$num; $j++)
+	   {
+              $wordlen = rand(1,6);
+              $newWord = null;
+              for ($i=0; $i <$wordlen/2 ; $i++) { 
+                        $ng = rand(0, count($glas) - 1);
+                        $nsg = rand(0, count($soglas) - 1);
+                        $newWord .= $glas[$ng].$soglas[$nsg];
+              }
+           if ($j===0) {
+               $newWord = ucfirst($newWord); 
+           }
+           if ($words>1) {
+               $newWord = ' ' . $newWord;
+           }
+           $out = $out .  $newWord;
+           }
+
+//     
+
+           return($out);
+        }
+//
+
+        private function createServer()
+        {
+                $servernames = array(
+                'Srv',
+                'PHP',
+                'Node',
+                'Ceph',
+                'PgSQL',
+                'Apache',
+                'NGINX',
+                'Server',
+                'Mail',
+                'Web',
+                'SQL',
+                'SRV',
+                'KVM'
+                );
+                $deviders = array(
+                (rand ( 1 , 127 )),
+                '-',
+                '.');
+                $rand_names = array_rand($servernames, 2);
+                $rand_deviders = array_rand($deviders);
+                //
+                $servername = ($servernames[$rand_names[0]] . $deviders[$rand_deviders] . $this->createMemo(1));
+                $IsVm = rand(0,1);
+                $Mem = rand(2,64);
+                $Cpu = rand(1,8);
+                $Hdd = rand(150,600);
+                $OnOff = rand(0,1);
+                $Ipaddr = (rand(2,254).".".rand(2,254).".".rand(2,254).".".rand(2,254));
+                //
+                $clusters = array($this->getReference('cluster'),$this->getReference('cluster2'),$this->getReference('cluster3'));
+                $rand_cluster = array_rand($clusters,1);
+                $ClusterID = $clusters[$rand_cluster];
+                //
+                $oses = array($this->getReference('os1'),$this->getReference('os2'),$this->getReference('os3'), $this->getReference('os4'), $this->getReference('os5'));
+                $rand_os = array_rand($oses);
+                $OSID = $oses[$rand_os];
+            
+                return [
+                    'servername' => $servername,
+	            'IsVm' => $IsVm,
+	            'Mem' => $Mem,
+	            'Cpu' => $Cpu,
+	            'Hdd' => $Hdd,
+	            'OnOff' => $OnOff,
+	            'Ipaddr' => $Ipaddr,
+	            'ClusterID' => $ClusterID,
+	            'OSID' => $OSID
+	        ];
+//                return (array_rand($servernames, 1));// . array_rand($servernames, 1));// . rand ( 1 , 127 ));
+
+        }
 	public function load(ObjectManager $manager)
 	{
-		$server = new Server();
+                for ($i = 1; $i <= 10; $i++)
+                {
+
+                $server = new Server();
+                $values = $this->createServer();
 		$server
-			->setName('Contoso-01')
-			->setIsVm(0)
-			->setMem(2)
-			->setCpu(4)
-			->setHdd(54)
-			->setStateOnOff(1)
-			->setIpaddr('89.22.53.4')
-			->setMemo('Site 1 main server')
-			->setClusterId($this->getReference('cluster'))
-			->setOsId($this->getReference('os'));
+			->setName($values['servername'])
+			->setIsVm($values['IsVm'])
+			->setMem($values['Mem'])
+			->setCpu($values['Cpu'])
+			->setHdd($values['Hdd'])
+			->setStateOnOff($values['OnOff'])
+			->setIpaddr($values['Ipaddr'])
+			->setMemo($this->createMemo())
+			->setClusterId($values['ClusterID'])
+			->setOsId($values['OSID']);
 		$manager->persist($server);
-		
+                $manager->flush();
+                $refname = 'server'.$i;
+		$this->addReference($refname, $server);
+                }
+/*		
 		$server2 = new Server();
+                $values = $this->createServer();
 		$server2
-			->setName('Acme.clouds')
+			->setName($values['servername'])
 			->setIsVm(1)
 			->setMem(4)
 			->setCpu(2)
@@ -47,8 +144,9 @@ class LoadServer extends Fixture implements DependentFixtureInterface
 		$manager->persist($server2);
 		
 		$server3 = new Server();
+                $values = $this->createServer();
 		$server3
-			->setName('mailserver')
+			->setName($values['servername'])
 			->setIsVm(1)
 			->setMem(8)
 			->setCpu(6)
@@ -65,7 +163,7 @@ class LoadServer extends Fixture implements DependentFixtureInterface
 		$this->addReference('server', $server);
 		$this->addReference('server2', $server2);
 		$this->addReference('server3', $server3);
-
+*/
 	}
 	public function getDependencies()
 	{

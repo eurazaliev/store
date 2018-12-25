@@ -38,7 +38,7 @@ class LoadVendor extends Fixture implements DependentFixtureInterface
 		$manager->persist($vendor3);
 		$manager->flush();		
 
-		$this->addReference('vendor', $vendor);
+		$this->addReference('vendor1', $vendor);
 		$this->addReference('vendor2', $vendor2);
 		$this->addReference('vendor3', $vendor3);
 
