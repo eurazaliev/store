@@ -14,10 +14,20 @@ class ServerController extends Controller
     /**
     * @Route("/server", name="server_list")
     */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
 	$em = $this->getDoctrine()->getManager();
-	$servers = $em->getRepository(Server::class)->findAll();
+	$serversQuery = $em->getRepository(Server::class)->findAll();
+	$paginator  = $this->get('knp_paginator');
+	$servers = $paginator->paginate(
+	             // Doctrine Query, not results
+	             $serversQuery,
+	              // Define the page parameter
+	             $request->query->getInt('page', 1),
+	             // Items per page
+	             5
+	        );
+	
         $entity = Server::getEntity();
 	return $this->render('server/list.html.twig', [
             'entity' => $entity,
@@ -29,7 +39,7 @@ class ServerController extends Controller
     {
         $server = new Server();
         $form = $this->createForm(ServerType::class, $server);
-        return $this->render('server/form.html.twig', array(
+        return $this->render('server/create.html.twig', array(
             'server' => $server,
             'form'   => $form->createView()
         ));
@@ -122,7 +132,7 @@ class ServerController extends Controller
 	    $this->addFlash('danger', $e->getMessage());
     	}
 
-        return $this->render('server/form_update.html.twig', [
+        return $this->render('server/update.html.twig', [
             'form' => $form->createView(),
             'id' => $id,
             'name' => $server->getName()

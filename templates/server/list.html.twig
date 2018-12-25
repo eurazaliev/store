@@ -58,6 +58,9 @@
   <tbody>
   </tbody>
 </table>
+<div class="navigation text-center">
+     {{ knp_pagination_render(servers) }}
+</div>
 <h3 class="text-center">Добавить</h3>
 {{ render(controller('App\\Controller\\ServerController::newAction')) }} 
 {% endblock %}

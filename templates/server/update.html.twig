@@ -1,34 +1,32 @@
-{# templates/server/index.html.twig #}
+{# src/templates/server/form_update.html.twig #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Страны{% endblock %}
+{% block title %}server{% endblock %}
 {% block body %}
 <div class="blog-header">
-    <h2 class="blog-title text-center">Редактировать</h2>
+    <h2 class="blog-title text-center">Редактирование {{name}}</h2>
 </div>
 
-<table class="table table-striped table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Memo</th>
-    </tr>
-  </thead>
-
-{% for server in servers %}
-     <br>
-     <br>
-    <tr>
-      <th scope="row">{{ server.id }}</th>
-      <td>{{ server.name }}</td>
-      <td>{{ server.memo }}</td>
-    </tr>
-
-{% else %}
-Записей нет.
+<div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+{#	<div class="alert alert-warning" role="alert"> #}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endfor %}
-  <tbody>
-  </tbody>
-</table>
+</div>
+
+
+<div class="container h-50">
+<div class="row h-50 justify-content-center align-items-center">
+<div class="col-sm-12 blog-main justify-content-center align-items-center">
+{{ form_start(form, { 'action': path('server_edit',{'id': id}), 'method': 'POST', 'attr': {'class': 'server'} }) }}
+    {{ include('server/form.html.twig') }}
+</div>{{ form_end(form) }} 
+</div>
+</div>
+</div>
 {% endblock %}

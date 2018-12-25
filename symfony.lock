@@ -98,6 +98,12 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "knplabs/knp-components": {
+        "version": "v1.3.10"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v2.8.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -106,6 +112,18 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "onurb/doctrine-metadata-grapher": {
+        "version": "1.1.11"
+    },
+    "onurb/doctrine-yuml-bundle": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "81130d6607195660087a01442f30be1edad71804"
+        }
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"

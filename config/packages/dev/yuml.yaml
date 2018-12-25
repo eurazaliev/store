@@ -1,0 +1,9 @@
+parameters:
+    onurb_yuml.extension: png #jpg, png (default), svg, pdf, or json
+    onurb_yuml.style: boring #plain (default), boring or scruffy
+    onurb_yuml.direction: TB #LR (left to Right), RL (Right to Left), TB (Top to bottom => default).
+    onurb_yuml.scale: tiny #huge, big, normal (default), small or tiny
+    onurb_yuml.show_fields_description: true #this parameter is set to true by default 
+    onurb_yuml.colors:
+        App\Entity\Server: royalblue
+        App\Entity\OS: skyblue

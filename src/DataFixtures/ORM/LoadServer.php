@@ -15,6 +15,30 @@ class LoadServer extends Fixture implements DependentFixtureInterface
 	{
 	echo "Loading ...";
 	}
+//
+/**
+  * Выборка случайного элемента с учетом веса
+  *
+  * @param array $values индексный массив элементов
+  * @param array $weights индексный массив соответствующих весов  
+  * @return mixed выбранный элемент  
+  */ 
+       private function weighted_random_simple ( $values, $weights ) 
+        {
+           $total = array_sum( $weights );
+           $n = 0;
+           $num = mt_rand( 1, $total );
+           foreach ( $values as $i => $value )
+                {
+                         $n += $weights[$i];
+                         if ( $n >= $num )
+                         {
+                                      return $values[$i];
+                          }     
+                 } 
+         }
+
+
        private function createMemo($words = 3)
         {
            $minlen = 5;
@@ -75,8 +99,12 @@ class LoadServer extends Fixture implements DependentFixtureInterface
                 //
                 $servername = ($servernames[$rand_names[0]] . $deviders[$rand_deviders] . $this->createMemo(1));
                 $IsVm = rand(0,1);
-                $Mem = rand(2,64);
-                $Cpu = rand(1,8);
+                $memories = array (2,4,8,16,32,64,128);
+                $memWeights = array(10,17,28,17,12,10,6);
+                $Mem = $this->weighted_random_simple($memories, $memWeights);
+                $cpus = array (1,2,4,8,16);
+                $cpuWeights = array(15,25,25,20,15);
+                $Cpu = $this->weighted_random_simple($cpus, $cpuWeights);
                 $Hdd = rand(150,600);
                 $OnOff = rand(0,1);
                 $Ipaddr = (rand(2,254).".".rand(2,254).".".rand(2,254).".".rand(2,254));
@@ -105,7 +133,7 @@ class LoadServer extends Fixture implements DependentFixtureInterface
         }
 	public function load(ObjectManager $manager)
 	{
-                for ($i = 1; $i <= 10; $i++)
+                for ($i = 1; $i <= 50; $i++)
                 {
 
                 $server = new Server();
