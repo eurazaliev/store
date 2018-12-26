@@ -47,4 +47,37 @@ class ServerRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findCountFields($field, $value): ?string
+    {
+        //находит количество записей в таблице, где поле $field = $value
+        return $this->createQueryBuilder('u')
+                     ->select('count(u.id)')
+                     ->andWhere("u.$field = $value")
+//                     ->setParameter('val', $value)
+//                     ->setParameter('field', $field)
+                     ->getQuery()
+                     ->getSingleScalarResult();
+
+    }
+
+    public function findCount(): ?int
+    {
+        //находит количество записей в таблице
+        return $this->createQueryBuilder('u')
+                     ->select('count(u.id)')
+                     ->getQuery()
+                     ->getSingleScalarResult();
+        //return $stmt->fetch();
+    }
+
+    public function findDistinctValuesInField($field): ?array
+    {
+        //находит уникальные значения поля $field
+        return $this->createQueryBuilder('u')
+                     ->select("Distinct (u.$field)")
+                     ->getQuery()
+                     ->getResult()
+                     ;
+    }
+
 }

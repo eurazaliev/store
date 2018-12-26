@@ -32,12 +32,17 @@ $I->click('Submit');
 $I->see('Done');
 
 //редактируем созданную запись
+$I->click('>>');
 $I->click($name);
 $I->see("Редактирование $name");
+$I->fillField('Hdd', 100);
 $I->selectOption('server[os_id]', $os);
-$I->click('Редактировать');
-$I->see('Edited');
+$I->click('Submit');
+$I->see('Error');
+$I->amOnPage('/server');
+$I->click('>>');
+
 
 //наконец удаляем
-$I->click("Удалить $name");
-$I->see("Deleted $name");
+//$I->click("Удалить $name");
+//$I->see("Deleted $name");
