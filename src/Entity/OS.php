@@ -58,7 +58,7 @@ class OS
 
     public function __toString()
     {
-	return $this->getName() . " " .  $this->getVersion();
+	return $this->getName() . " " .  $this->getVersion() . " " . $this->getPlatformID();
     }
 
     public function __construct()

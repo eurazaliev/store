@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Server;
+use App\Entity\OS;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
 
@@ -18,7 +19,9 @@ class DefaultController extends AbstractController
     */
     public function index()
     {
+        //общее кол-во серверов для вычисления процентов
         $countServers = $this->getDoctrine()->getRepository(Server::class)->findCount(); 
+        //собираем данные по памяти
         $memoriesValues = $this->getDoctrine()->getRepository(Server::class)->findDistinctValuesInField('mem');
         $mems = array();
         $memorySize = null;
@@ -27,7 +30,7 @@ class DefaultController extends AbstractController
             $mS = $memorySize[1];
             $mems[] = array (($mS . "Gb"), round((($this->getDoctrine()->getRepository(Server::class)->findCountFields('mem',$mS)))/$countServers*100));
         }
-        //готовим график CPU
+        //собираем данные для графика CPU
         $cpusValues = $this->getDoctrine()->getRepository(Server::class)->findDistinctValuesInField('cpu');
         $cpus = array();
         $cpuSize = null;
@@ -37,11 +40,27 @@ class DefaultController extends AbstractController
             $cpus[] = array (("Ядер " . $cores), round((($this->getDoctrine()->getRepository(Server::class)->findCountFields('cpu',$cores)))/$countServers*100));
         }
        //данные получены
+       //собираем данные в разрезе ОС
+        $osIDs = $this->getDoctrine()->getRepository(Server::class)->findDistinctValuesInField('os_id');
+        $oses = array();
+        $osName = null;
+        $em = $this->getDoctrine()->getManager();
+        foreach ($osIDs as $osid)
+        {
+            $id = $osid[1];
+            $osName = $em->getRepository(OS::class)->find($id);
+            $oses[] = array (("ОС ". $osName), round((($this->getDoctrine()->getRepository(Server::class)->findCountFields('os_id',$id))/$countServers*100)));
+        }
+       
+       //
 
         return $this->render('index.html.twig', [
-            'mems' => $mems,
-            'chart' => $this->drawPie ($mems, '% серверов','Распределение серверов в разрезе установленной памяти', 'memchart'),
-            'chart1' => $this->drawPie ($cpus, '% серверов','Распределение серверов в разрезе ядер процессора', 'cpuchart'),            
+            'mems' => $oses,
+            'memchart' => $this->drawPie ($mems, '% серверов','Распределение серверов в разрезе установленной памяти', 'memchart'),
+            'cpuchart' => $this->drawPie ($cpus, '% серверов','Распределение серверов в разрезе ядер процессора', 'cpuchart'),            
+            'oschart' => $this->drawPie ($oses, '% серверов','Распределение серверов в разрезе OS', 'oschart'),            
+            
+
         ]);
     }
     private function drawPie ($data, $name, $title, $chartname)

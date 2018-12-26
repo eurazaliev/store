@@ -100,10 +100,10 @@ class LoadServer extends Fixture implements DependentFixtureInterface
                 $servername = ($servernames[$rand_names[0]] . $deviders[$rand_deviders] . $this->createMemo(1));
                 $IsVm = rand(0,1);
                 $memories = array (2,4,8,16,32,64,128);
-                $memWeights = array(10,17,28,17,12,10,6);
+                $memWeights = array(10,15,32,15,12,10,6);
                 $Mem = $this->weighted_random_simple($memories, $memWeights);
                 $cpus = array (1,2,4,8,16);
-                $cpuWeights = array(15,25,25,20,15);
+                $cpuWeights = array(15,30,25,20,10);
                 $Cpu = $this->weighted_random_simple($cpus, $cpuWeights);
                 $Hdd = rand(150,600);
                 $OnOff = rand(0,1);
