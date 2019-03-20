@@ -1,1 +1,1 @@
-bin/console server:start 185.228.234.189:8000
+bin/console server:start clouds.today:8000

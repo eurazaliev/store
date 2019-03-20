@@ -26,3 +26,11 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 /tests/_output/*
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

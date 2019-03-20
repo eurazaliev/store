@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServerRepository")
@@ -18,16 +19,19 @@ class Server
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"forapi"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"forapi"})
      */
     private $is_vm;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"forapi"})
      */
     private $mem;
 
@@ -65,6 +69,7 @@ class Server
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\OS", inversedBy="servers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"forapi"})
      */
     private $os_id;
 
@@ -165,12 +170,12 @@ class Server
 
     public function getMemoo(): ?string
     {
-        return $this->memoo;
+        return $this->memo;
     }
 
     public function setMemoo(?string $memoo): self
     {
-        $this->memoo = $memoo;
+        $this->memo = $memo;
 
         return $this;
     }

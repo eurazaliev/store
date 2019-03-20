@@ -1,0 +1,2 @@
+#curl -X POST -H Content-Type: application/json http://localhost:8080/login_check -d '{username:lol, password:test}'
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NTI5MTM4NTEsImV4cCI6MTU1MjkxNzQ1MSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibG9sIn0.E_jW1M2nqsiaG9GfkaaCSyoB0i60DwTnue-zHKcjPFbhftqydWGx4rU8aMtwFkiG7JhxRvLGheU7w3dTUUi7Sv9AqeFqYwJ55Or-_z-63XXEWfj63tXZ2sG78UgCqGt0Ppsiz80kQomAW6818N24JoZX_a12UWZ3KHNGbAA5qkI" http://localhost:8080/api

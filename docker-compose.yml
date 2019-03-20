@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     mariadb:
-        image: mariadb:5.5
+        image: mariadb:10.3
         restart: always
         volumes:
             - ./docker/mariadb:/var/lib/mysql
@@ -15,11 +15,8 @@ services:
             - "8080:80"
         volumes:
             - ./docker/logs/nginx:/var/log/nginx
-<<<<<<< HEAD
             - ./:/var/www/store
-=======
             - ./store:/var/www/store
->>>>>>> 47e8fac5df544a01135cd5c634fba588fa2690fd
         depends_on:
             - php
 
@@ -27,8 +24,5 @@ services:
         build: ./docker/php-fpm
         image: php:7.2-fpm
         volumes:
-<<<<<<< HEAD
             - ./:/var/www/store
-=======
             - ./store:/var/www/store
->>>>>>> 47e8fac5df544a01135cd5c634fba588fa2690fd
