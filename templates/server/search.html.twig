@@ -1,0 +1,13 @@
+{# src/templates/server/search.html.twig #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<div class="container h-50">
+<div class="row h-50 justify-content-center align-items-center">
+<div class="col-sm-12 blog-main justify-content-center align-items-center">
+{{ form_start(form, { 'action': path('server_search'), 'method': 'POST', 'attr': {'class': 'server', novalidate: 'novalidate'} }) }}
+    {{ include('server/formSearch.html.twig') }}
+{{ form_end(form) }} 
+</div>
+</div>
+</div>
+

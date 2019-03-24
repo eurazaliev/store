@@ -1,0 +1,9 @@
+cluster.name: cluster
+node.name: "node1"
+network.host: 0.0.0.0
+#network.bind_host: localhost
+#network.publish_host: 0.0.0.0
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "Authorization"

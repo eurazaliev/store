@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Server;
 use App\Form\ServerType;
+use App\Form\ServerSearchType;
 
 class ServerController extends Controller
 {
@@ -142,8 +143,54 @@ class ServerController extends Controller
 	    $this->addFlash('danger', "$id not found");        
 	    return $this->redirect($this->generateUrl('server_list'));
         }
-    }    
-}
+    }
+    /**
+     * @Route("/server_search", name="server_search")
+     */
 
+    public function searchAction(Request $request)
+    {
+        $serverSearch = new Server();
+
+        $form = $this->createForm(ServerSearchType::class, $serverSearch);
+        $form->handleRequest($request);
+
+        $serverSearch = $form->getData();
+
+        $elasticaManager = $this->get('fos_elastica.manager');
+        $results = $elasticaManager->getRepository(Server::class)->searchServer($serverSearch);
+
+        $entity = Server::getEntity();
+
+	$paginator  = $this->get('knp_paginator');
+	$servers = $paginator->paginate(
+	             // Doctrine Query, not results
+	             $results,
+	              // Define the page parameter
+	             $request->query->getInt('page', 1),
+	             // Items per page
+	             500
+	        );
+
+
+        return $this->render('server/list.html.twig', [
+//            'form' => $form->createView(),
+            'entity' => $entity,
+            'servers' => $servers
+        ]);
+    }
+
+    public function searchFormAction()
+    {
+        $server = new Server();
+        $form = $this->createForm(ServerSearchType::class, $server);
+        return $this->render('server/search.html.twig', array(
+            'server' => $server,
+            'form'   => $form->createView()
+        ));
+    }
+
+    
+}
 
 ?>

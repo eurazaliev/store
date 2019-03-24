@@ -1,0 +1,36 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: elasticsearch, port: 9200 }
+    indexes:
+        search:
+            finder: ~
+            client: default
+            types:
+                server:
+                    properties:
+                        id:
+                            type: integer
+                        name:
+                            type: text
+                            analyzer: english
+                        memo:
+                            type: text
+                            analyzer: russian
+                        mem:
+                            type: integer
+                        os_id:
+                            type: "object"
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: keyword
+                    persistence:
+                        driver: orm
+                        model: App\Entity\Server
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                        repository: App\Repository\ServerSearchRepository
+                        

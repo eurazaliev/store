@@ -14,6 +14,8 @@ RUN apt-get update \
     mc \
 && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-WORKDIR /var/www/symfony
+RUN sed -i "s/memory_limit = 128M/memory_limit = 2048M/" /etc/php/7.2/fpm/php.ini
+
+WORKDIR /var/www/store
 
 EXPOSE 9000
