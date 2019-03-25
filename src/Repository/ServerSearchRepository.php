@@ -19,10 +19,11 @@ class ServerSearchRepository extends Repository
 {
 
     // This searchUser function will build the elasticsearch query to get a list of users that match our criterias
+/*
     public function searchServer(Server $search)
     {
 
-/*
+
         $query = new BoolQuery();
 
         if ($search->getName() != null && $search->getName() != '') {
@@ -44,44 +45,48 @@ class ServerSearchRepository extends Repository
                          return $bool;
 
 */
-    $bool = new BoolQuery();
+    public function searchServer(\App\Entity\SearchServer $search)
+    {
 
-      $query = new Query();
+        $bool = new BoolQuery();
     
-    if ($search->getMem() != null && $search->getMem() != 0) {
-        $memQuery = new \Elastica\Query\Range('mem', array('gt' => 0, 'lte' => $search->getMem()));
-        $bool->addMust($memQuery);
-        //$result= $this->finder->find($boolQuery));
-    }
+        if ($search->getMemMin() != null || $search->getMemMax() != null) {
+            $memQuery = new Range('mem', array('gte' => $search->getMemMin(), 'lte' => $search->getMemMax()));
+            $bool->addMust($memQuery);
+        }
 
-    if ($search->getName() != null  && $search->getName() != '') {
-        $query = new \Elastica\Query\QueryString();
-        $str = "*".$search->getName()."*";
-        $query->setQuery($str);
-        $query->setFields(array('name', 'memo'));
+        if ($search->getCpuMin() != null || $search->getCpuMax() != null) {
+            $cpuQuery = new Range('cpu', array('gte' => $search->getCpuMin(), 'lte' => $search->getCpuMax()));
+            $bool->addMust($cpuQuery);
+        }
+
+        if ($search->getName() != null  && $search->getName() != '') {
+            $nameQuery = new QueryString();
+            $str = "*".$search->getName()."*";
+            $nameQuery->setQuery($str);
+            $nameQuery->setFields(array('name', 'memo'));
+            
+            $bool->addMust($nameQuery);
         
-        $bool->addMust($query);
-        
-        //$query->setFieldQuery('name', $str);
-        //$query->setField('name'  , array('query' => $str));//$search->getName()));
-    } else {
-        $query = new \Elastica\Query\MatchAll();
-    }
+        } else {
+            $query = new \Elastica\Query\MatchAll();
+        }
     
-    if ($search->getOsId() != null  && $search->getOsId() != '') {
-        
-        $osIdQuery = new Match();
-        $osIdQuery->setFieldQuery('os_id.id', $search->getOsId()->getId());
-        
-//        $osQuery = new Match ();
-//        $osQuery->setPath('os_id.id');
-//        $osQuery->setQuery($osIdQuery);
-        $bool->addMust($osIdQuery);
+        if ($search->getOsId() != null  && $search->getOsId() != '') {
+            $osIdQuery = new Match();
+            $osIdQuery->setFieldQuery('os_id.id', $search->getOsId()->getId());
+            $bool->addMust($osIdQuery);
+        }
 
-    }
+        if ($search->getClusterId() != null  && $search->getClusterId() != '') {
+            $clusterIdQuery = new Match();
+            $clusterIdQuery->setFieldQuery('cluster_id.id', $search->getClusterId()->getId());
+            $bool->addMust($clusterIdQuery);
+        }
 
     
 //    die(print_r(json_encode($bool->toArray())));
     return $this->find($bool, 3000);
+
     }
 }

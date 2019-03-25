@@ -4,9 +4,22 @@
 <div class="container h-50">
 <div class="row h-50 justify-content-center align-items-center">
 <div class="col-sm-12 blog-main justify-content-center align-items-center">
-{{ form_start(form, { 'action': path('server_create'), 'method': 'POST', 'attr': {'class': 'server'} }) }}
-    {{ include('server/form.html.twig') }}
-{{ form_end(form) }} 
+
+    <a data-toggle="collapse" href="#linkcollapse2" aria-expanded="failse" aria-controls="Collapse">
+    Показать форму
+    </a>
+    <p>
+    <div class="collapse" id="linkcollapse2">
+    <div class="card card-block">
+
+
+     {{ form_start(form, { 'action': path('server_create'), 'method': 'POST', 'attr': {'class': 'server'} }) }}
+        {{ include('server/form.html.twig') }}
+     {{ form_end(form) }} 
+
+     </div>
+     </div>
+
 </div>
 </div>
 </div>

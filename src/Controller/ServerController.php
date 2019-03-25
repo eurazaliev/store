@@ -6,7 +6,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Server;
+use App\Entity\SearchServer;
+
 use App\Form\ServerType;
+use App\Form\SearchServerType;
+
 use App\Form\ServerSearchType;
 
 class ServerController extends Controller
@@ -17,15 +21,31 @@ class ServerController extends Controller
     */
     public function indexAction(Request $request)
     {
+	$form = $this->createForm(SearchServerType::class, new SearchServer());
+        $form->handleRequest($request);
+
+	if ($form->isSubmitted()) {
+            $searchRequest = $form->getData();
+            $em = $this->getDoctrine()
+                ->getManager();
+            $em->persist($searchRequest);
+            $em->flush();
+
+            //$searchService = $this->get(HotelSearch::class);
+            //if ($searchService->search($searchRequest)) {
+                return $this->redirectToRoute('server_search', ['id' => $searchRequest->getId(), 'page' => 1]);
+            //} else {
+            //    $hasSearchError = true;
+            //}
+        }
+
+	
 	$em = $this->getDoctrine()->getManager();
 	$serversQuery = $em->getRepository(Server::class)->findAll();
 	$paginator  = $this->get('knp_paginator');
 	$servers = $paginator->paginate(
-	             // Doctrine Query, not results
 	             $serversQuery,
-	              // Define the page parameter
 	             $request->query->getInt('page', 1),
-	             // Items per page
 	             5
 	        );
 	
@@ -145,31 +165,21 @@ class ServerController extends Controller
         }
     }
     /**
-     * @Route("/server_search", name="server_search")
-     */
+     * @Route("/server_search/{id}/", name="server_search")
+    */
+    public function searchAction(Request $request, int $id)
 
-    public function searchAction(Request $request)
     {
-        $serverSearch = new Server();
-
-        $form = $this->createForm(ServerSearchType::class, $serverSearch);
-        $form->handleRequest($request);
-
-        $serverSearch = $form->getData();
-
+        $em = $this->getDoctrine()->getManager();
+        $serverSearch = $em->getRepository(SearchServer::class)->find($id);
         $elasticaManager = $this->get('fos_elastica.manager');
         $results = $elasticaManager->getRepository(Server::class)->searchServer($serverSearch);
-
-        $entity = Server::getEntity();
-
+        $entity = SearchServer::getEntity();
 	$paginator  = $this->get('knp_paginator');
 	$servers = $paginator->paginate(
-	             // Doctrine Query, not results
 	             $results,
-	              // Define the page parameter
 	             $request->query->getInt('page', 1),
-	             // Items per page
-	             500
+	             5
 	        );
 
 
@@ -182,8 +192,8 @@ class ServerController extends Controller
 
     public function searchFormAction()
     {
-        $server = new Server();
-        $form = $this->createForm(ServerSearchType::class, $server);
+        $server = new SearchServer();
+        $form = $this->createForm(SearchServerType::class, $server);
         return $this->render('server/search.html.twig', array(
             'server' => $server,
             'form'   => $form->createView()

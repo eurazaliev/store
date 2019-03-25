@@ -19,7 +19,16 @@ fos_elastica:
                             analyzer: russian
                         mem:
                             type: integer
+                        cpu:
+                            type: integer
                         os_id:
+                            type: "object"
+                            properties:
+                                id:
+                                    type: integer
+                                name:
+                                    type: keyword
+                        cluster_id:
                             type: "object"
                             properties:
                                 id:
