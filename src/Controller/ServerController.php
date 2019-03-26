@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Server;
 use App\Entity\SearchServer;
 
+use App\Service\ServerSearcher;
+
 use App\Form\ServerType;
 use App\Form\SearchServerType;
 
@@ -26,17 +28,13 @@ class ServerController extends Controller
 
         if ($form->isSubmitted()) {
             $searchRequest = $form->getData();
-            $em = $this->getDoctrine()
-                ->getManager();
-            $em->persist($searchRequest);
-            $em->flush();
-
-            //$searchService = $this->get(HotelSearch::class);
-            //if ($searchService->search($searchRequest)) {
+            $searchService = $this->get(ServerSearcher::class);
+            if ($searchService->search($searchRequest)) {
                 return $this->redirectToRoute('server_search', ['id' => $searchRequest->getId(), 'page' => 1]);
-            //} else {
-            //    $hasSearchError = true;
-            //}
+            } else {
+                $this->addFlash('danger', "Ошибка поиска");
+                $hasSearchError = true;
+            }
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -50,7 +48,8 @@ class ServerController extends Controller
         $entity = Server::getEntity();
         return $this->render('server/list.html.twig', [
             'entity' => $entity,
-            'servers' => $servers
+            'servers' => $servers,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -143,12 +142,12 @@ class ServerController extends Controller
         }
         elseif($form->isSubmitted()<>FALSE)
         {
-	    $this->addFlash('danger', "Error edit");
+            $this->addFlash('danger', "Error edit");
         }
         }
         catch (\Doctrine\DBAL\DBALException $e){
-	    $this->addFlash('danger', $e->getMessage());
-    	}
+            $this->addFlash('danger', $e->getMessage());
+        }
 
         return $this->render('server/update.html.twig', [
             'form' => $form->createView(),
@@ -157,33 +156,40 @@ class ServerController extends Controller
         ]);
         }
         else {
-	    $this->addFlash('danger', "$id not found");        
-	    return $this->redirect($this->generateUrl('server_list'));
+            $this->addFlash('danger', "$id not found");        
+            return $this->redirect($this->generateUrl('server_list'));
         }
     }
     /**
      * @Route("/server_search/{id}/", name="server_search")
-    */
+     */
     public function searchAction(Request $request, int $id)
 
     {
         $em = $this->getDoctrine()->getManager();
         $serverSearch = $em->getRepository(SearchServer::class)->find($id);
-        $elasticaManager = $this->get('fos_elastica.manager');
-        $results = $elasticaManager->getRepository(Server::class)->searchServer($serverSearch);
         $entity = SearchServer::getEntity();
-	$paginator  = $this->get('knp_paginator');
-	$servers = $paginator->paginate(
-	             $results,
-	             $request->query->getInt('page', 1),
-	             5
-	        );
 
-
+        if ($serverSearch->isCompleted()) {
+            $elasticaManager = $this->get('fos_elastica.manager');
+            $results = $elasticaManager->getRepository(Server::class)->searchServer($serverSearch);
+            $paginator  = $this->get('knp_paginator');
+            $servers = $paginator->paginate(
+                     $results,
+                     $request->query->getInt('page', 1),
+                     5
+            );
+        }
         return $this->render('server/list.html.twig', [
-//            'form' => $form->createView(),
+            'form' => $this ->createForm(
+                    SearchServerType::class,
+                    $serverSearch,
+                    ['action' => $this->generateUrl('server_list')]
+                )
+                ->createView(),
+            'request' => $serverSearch,
             'entity' => $entity,
-            'servers' => $servers
+            'servers' => $servers ?: []
         ]);
     }
 

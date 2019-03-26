@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SearchServer
 {
+    const STATUS_NEW = 0;
+    const STATUS_COMPLETE = 1;
+    const STATUS_OLD = 2;
+    const STATUS_ERROR = 3;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -85,6 +90,24 @@ class SearchServer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $count;
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $status = self::STATUS_NEW;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
 
     static function getEntity(): ?string
     {
@@ -264,4 +287,54 @@ class SearchServer
 
         return $this;
     }
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     * @return SearchRequest
+     */
+    public function setStatus(int $status): SearchServer
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompleted(): bool
+    {
+        return in_array($this->status, [self::STATUS_COMPLETE, self::STATUS_OLD]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isError(): bool
+    {
+        return $this->status == self::STATUS_ERROR;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return $this->status == self::STATUS_NEW;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
 }
