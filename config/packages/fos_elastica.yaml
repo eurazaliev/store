@@ -14,6 +14,8 @@ fos_elastica:
                         name:
                             type: text
                             analyzer: english
+                        is_vm:
+                            type: boolean
                         memo:
                             type: text
                             analyzer: russian
@@ -21,6 +23,12 @@ fos_elastica:
                             type: integer
                         cpu:
                             type: integer
+                        hdd:
+                            type: integer
+                        state_on_off:
+                            type: boolean
+                        ipaddr:
+                            type: keyword
                         os_id:
                             type: "object"
                             properties:

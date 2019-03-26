@@ -21,10 +21,10 @@ class ServerController extends Controller
     */
     public function indexAction(Request $request)
     {
-	$form = $this->createForm(SearchServerType::class, new SearchServer());
+        $form = $this->createForm(SearchServerType::class, new SearchServer());
         $form->handleRequest($request);
 
-	if ($form->isSubmitted()) {
+        if ($form->isSubmitted()) {
             $searchRequest = $form->getData();
             $em = $this->getDoctrine()
                 ->getManager();
@@ -39,21 +39,19 @@ class ServerController extends Controller
             //}
         }
 
-	
-	$em = $this->getDoctrine()->getManager();
-	$serversQuery = $em->getRepository(Server::class)->findAll();
-	$paginator  = $this->get('knp_paginator');
-	$servers = $paginator->paginate(
-	             $serversQuery,
-	             $request->query->getInt('page', 1),
-	             5
-	        );
-	
+        $em = $this->getDoctrine()->getManager();
+        $serversQuery = $em->getRepository(Server::class)->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $servers = $paginator->paginate(
+                     $serversQuery,
+                     $request->query->getInt('page', 1),
+                     5
+                );
         $entity = Server::getEntity();
-	return $this->render('server/list.html.twig', [
+        return $this->render('server/list.html.twig', [
             'entity' => $entity,
-	    'servers' => $servers
-	]);
+            'servers' => $servers
+        ]);
     }
 
     public function newAction()
@@ -76,7 +74,7 @@ class ServerController extends Controller
         $form    = $this->createForm(ServerType::class, $server);
         $form->handleRequest($request);
 
-	try {
+        try {
         if ($form->isValid()) {
             $em = $this->getDoctrine()
                 ->getManager();
@@ -86,13 +84,13 @@ class ServerController extends Controller
             return $this->redirect($this->generateUrl('server_list'));
         }
         else {
-    	    $this->addFlash('danger', "Error in form");
+            $this->addFlash('danger', "Error in form");
         }
         }
         catch (\Doctrine\DBAL\DBALException $e){
-	$this->addFlash('danger', $e->getMessage());
-	}
-	return $this->redirect($this->generateUrl('server_list'));
+        $this->addFlash('danger', $e->getMessage());
+        }
+        return $this->redirect($this->generateUrl('server_list'));
     }    
     /**
     * @Route("/server_delete/{id}", name="server_delete")
@@ -111,17 +109,16 @@ class ServerController extends Controller
         return $this->redirect($this->generateUrl('server_list'));
         }
         else {
-	    $this->addFlash('danger', "$id not found");
-        
+            $this->addFlash('danger', "$id not found");
         }
         }
-	catch (\Doctrine\DBAL\DBALException $e){
-	    $this->addFlash('danger', $e->getMessage());
-    	}
-    	catch (\Doctrine\ORM\ORMException $e) {
-	    $this->addFlash('danger', $e->getMessage());
-    	}
-    	return $this->redirect($this->generateUrl('server_list'));
+        catch (\Doctrine\DBAL\DBALException $e){
+            $this->addFlash('danger', $e->getMessage());
+        }
+        catch (\Doctrine\ORM\ORMException $e) {
+            $this->addFlash('danger', $e->getMessage());
+        }
+        return $this->redirect($this->generateUrl('server_list'));
     }
 
     /**
@@ -134,7 +131,7 @@ class ServerController extends Controller
         if ($server) {
         $form = $this->createForm(ServerType::class, $server);
         $form->handleRequest($request);
-	try {
+        try {
         if ($form->isSubmitted() && $form->isValid()) {
 
 //	    $em->persist($server);
@@ -199,8 +196,6 @@ class ServerController extends Controller
             'form'   => $form->createView()
         ));
     }
-
-    
 }
 
 ?>
