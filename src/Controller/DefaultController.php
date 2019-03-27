@@ -51,9 +51,6 @@ class DefaultController extends AbstractController
             $osName = $em->getRepository(OS::class)->find($id);
             $oses[] = array (("ОС ". $osName), round((($this->getDoctrine()->getRepository(Server::class)->findCountFields('os_id',$id))/$countServers*100)));
         }
-       
-       //
-
         return $this->render('index.html.twig', [
             'mems' => $oses,
             'memchart' => $this->drawPie ($mems, '% серверов','Распределение серверов в разрезе установленной памяти', 'memchart'),

@@ -58,8 +58,6 @@ class ServerSearchRepository extends Repository
             $nameQuery->setQuery($str);
             $nameQuery->setFields(array('name', 'memo'));
             $bool->addMust($nameQuery);
-        //} else {
-        //    $query = new \Elastica\Query\MatchAll();
         }
     
         if ($search->getOsId() != null  && $search->getOsId() != '') {
@@ -92,34 +90,6 @@ class ServerSearchRepository extends Repository
             $IpQuery->setFields(array('ipaddr'));
             $bool->addMust($IpQuery);
         }
-  //    die(print_r(json_encode($bool->toArray())));
         return $bool;
     }
-/*
-    public function searchServer(Server $search)
-    {
-
-
-        $query = new BoolQuery();
-
-        if ($search->getName() != null && $search->getName() != '') {
-            $query->addMust(new Terms('name', [$search->getName()]));
-        }
-
-        if ($search->getMem() != null && $search->getMem() != '') {
-            $query->addMust(new Terms('mem', [$search->getMem()]));
-        }
-        $query1 = Query::create($query);
-
-        die(print_r(json_encode($query1->toArray())));
-
-        return $this->find($query1, 3000);
-     $bool = new BoolQuery();
-          $text = new Match();
-               $text->setField('text', $search);
-                    $bool->addMust($text);
-                         return $bool;
-
-*/
-    
 }
