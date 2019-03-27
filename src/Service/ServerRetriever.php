@@ -15,11 +15,15 @@ class ServerRetriever implements ServerRetrieverInterface
      */
     protected $em;
 
+    /**
+     * @var RepositoryManager
+     */
     private $elasticaManager;
 
     /**
-     * HotelRetriever constructor.
+     * ServerRetriever constructor.
      * @param EntityManagerInterface $em
+     * @param RepositoryManager $elasticaManager
      */
     public function __construct(EntityManagerInterface $em, RepositoryManager $elasticaManager)
     {

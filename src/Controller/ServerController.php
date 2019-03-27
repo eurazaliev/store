@@ -9,6 +9,7 @@ use App\Entity\Server;
 use App\Entity\SearchServer;
 
 use App\Service\ServerSearcher;
+use App\Service\ElasticaPopulator;
 
 use App\Form\ServerType;
 use App\Form\SearchServerType;
@@ -137,7 +138,6 @@ class ServerController extends Controller
             $em->flush();
             $message = "Edited ". $server->getName();
             $this->addFlash('success', $message);
-
             return $this->redirectToRoute('server_list');
         }
         elseif($form->isSubmitted()<>FALSE)
@@ -154,8 +154,7 @@ class ServerController extends Controller
             'id' => $id,
             'name' => $server->getName()
         ]);
-        }
-        else {
+        } else {
             $this->addFlash('danger', "$id not found");        
             return $this->redirect($this->generateUrl('server_list'));
         }
@@ -203,5 +202,4 @@ class ServerController extends Controller
         ));
     }
 }
-
 ?>
