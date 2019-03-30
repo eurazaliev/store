@@ -48,4 +48,9 @@ class ServerSearcher
         }
         return $request->getStatus() == SearchServer::STATUS_COMPLETE;
     }
+    
+    public function getSearchResults(SearchServer $request)
+    {
+        return $this->retriever->getByRequest($request);
+    }    
 }

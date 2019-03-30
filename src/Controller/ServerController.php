@@ -73,7 +73,6 @@ class ServerController extends Controller
         $server  = new Server();
         $form    = $this->createForm(ServerType::class, $server);
         $form->handleRequest($request);
-
         try {
         if ($form->isValid()) {
             $em = $this->getDoctrine()
@@ -140,7 +139,7 @@ class ServerController extends Controller
             $this->addFlash('success', $message);
             return $this->redirectToRoute('server_list');
         }
-        elseif($form->isSubmitted()<>FALSE)
+        elseif($form->isSubmitted())
         {
             $this->addFlash('danger', "Error edit");
         }
@@ -160,18 +159,20 @@ class ServerController extends Controller
         }
     }
     /**
-     * @Route("/server_search/{id}/", name="server_search")
+     * @Route("/server_search/{id}/", name="server_search",  defaults={"id"=1})
      */
-    public function searchAction(Request $request, int $id)
+//    public function searchAction(Request $request, int $id)
+    public function searchAction(Request $request, SearchServer $serverSearch)
+
 
     {
-        $em = $this->getDoctrine()->getManager();
-        $serverSearch = $em->getRepository(SearchServer::class)->find($id);
+//        $em = $this->getDoctrine()->getManager();
+//        $serverSearch = $em->getRepository(SearchServer::class)->find($id);
         $entity = SearchServer::getEntity();
 
         if ($serverSearch->isCompleted()) {
-            $elasticaManager = $this->get('fos_elastica.manager');
-            $results = $elasticaManager->getRepository(Server::class)->searchServer($serverSearch);
+            $searchService = $this->get(ServerSearcher::class);
+            $results = $searchService->getSearchResults($serverSearch);
             $paginator  = $this->get('knp_paginator');
             $servers = $paginator->paginate(
                      $results,
