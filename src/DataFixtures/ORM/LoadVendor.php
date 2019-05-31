@@ -15,17 +15,17 @@ class LoadVendor extends Fixture implements DependentFixtureInterface
 	{
 		$vendor = new Vendor();
 		$vendor
-			->setName('HPE')
+			->setName('BestSoft')
 			->setPermit(0)
-			->setMemo('Hewlett Packard Ent')
+			->setMemo('BestSoft IT company')
 			->setCountryId($this->getReference('country'));
 		$manager->persist($vendor);
 		
 		$vendor2 = new Vendor();
 		$vendor2
-			->setName('Microsoft')
+			->setName('ANE ware')
 			->setPermit(0)
-			->setMemo('MS Corp')
+			->setMemo('Adwanced Network Equipment')
 			->setCountryId($this->getReference('country2'));
 		$manager->persist($vendor2);
 		
