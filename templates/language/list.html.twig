@@ -1,7 +1,7 @@
 {# templates/language/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Языки{% endblock %}
+{% block title %}Languages{% endblock %}
 {% block body %}
 <div class="blog-header">
     <h2 class="blog-title text-center">{{entity}}</h2>
@@ -33,15 +33,15 @@
       <th scope="row">{{ language.id }}</th>
       <td><a href="{{ url('language_edit',{'id': language.id}) }}" class="db-list-edit"> {{ language.name }}</a></td>
       <td>{{ language.memo }}</td>
-      <td><a href="{{ url('language_delete',{'id': language.id}) }}" class="db-list-edit" onclick="return confirm(' {{ language.name }} будет удалено, продолжить?')">Удалить {{ language.name }}</a></td>
+      <td><a href="{{ url('language_delete',{'id': language.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ language.name }}?')">Delete {{ language.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\LanguageController::newAction')) }} 
 {% endblock %}

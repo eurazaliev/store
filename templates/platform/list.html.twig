@@ -1,7 +1,7 @@
 {# templates/platform/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Языки{% endblock %}
+{% block title %}Platforms{% endblock %}
 {% block body %}
 <div class="blog-header">
     <h2 class="blog-title text-center">{{entity}}</h2>
@@ -33,15 +33,15 @@
       <th scope="row">{{ platform.id }}</th>
       <td><a href="{{ url('platform_edit',{'id': platform.id}) }}" class="db-list-edit"> {{ platform.name }}</a></td>
       <td>{{ platform.memo }}</td>
-      <td><a href="{{ url('platform_delete',{'id': platform.id}) }}" class="db-list-edit" onclick="return confirm(' {{ platform.name }} будет удалено, продолжить?')">Удалить {{ platform.name }}</a></td>
+      <td><a href="{{ url('platform_delete',{'id': platform.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ platform.name }}?')">Delete {{ platform.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\PlatformController::newAction')) }} 
 {% endblock %}

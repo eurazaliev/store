@@ -14,20 +14,20 @@ class LoadProject extends Fixture
 	{
 		$project = new Project();
 		$project
-			->setName('Большой')
-			->setMemo('еще пользуемся');
+			->setName('Billing2')
+			->setMemo('New billing system development');
 		$manager->persist($project);
 		
 		$project2 = new Project();
 		$project2
-			->setName('Внедрение')
-			->setMemo('');
+			->setName('VIRT')
+			->setMemo('Virtualization platform version 3.1');
 		$manager->persist($project2);
 		
 		$project3 = new Project();
 		$project3
-			->setName('Сады и кусты')
-			->setMemo('новый');
+			->setName('HA')
+			->setMemo('High Available software cluster');
 		$manager->persist($project3);
 		$manager->flush();		
 

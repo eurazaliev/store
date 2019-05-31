@@ -154,44 +154,6 @@ class LoadServer extends Fixture implements DependentFixtureInterface
                 $refname = 'server'.$i;
 		$this->addReference($refname, $server);
                 }
-/*		
-		$server2 = new Server();
-                $values = $this->createServer();
-		$server2
-			->setName($values['servername'])
-			->setIsVm(1)
-			->setMem(4)
-			->setCpu(2)
-			->setHdd(154)
-			->setStateOnOff(1)
-			->setIpaddr('94.22.353.24')
-			->setMemo('Site 2 server')
-			->setClusterId($this->getReference('cluster2'))
-			->setOsId($this->getReference('os2'));
-
-		$manager->persist($server2);
-		
-		$server3 = new Server();
-                $values = $this->createServer();
-		$server3
-			->setName($values['servername'])
-			->setIsVm(1)
-			->setMem(8)
-			->setCpu(6)
-			->setHdd(1254)
-			->setStateOnOff(1)
-			->setIpaddr('189.222.153.44')
-			->setMemo('No shutdown')
-			->setClusterId($this->getReference('cluster3'))
-			->setOsId($this->getReference('os3'));
-
-		$manager->persist($server3);
-		$manager->flush();		
-
-		$this->addReference('server', $server);
-		$this->addReference('server2', $server2);
-		$this->addReference('server3', $server3);
-*/
 	}
 	public function getDependencies()
 	{

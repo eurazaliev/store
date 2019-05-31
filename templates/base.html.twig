@@ -21,31 +21,24 @@
     <a class="nav-link active" href="{{ path('home') }}">Home</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Справочники</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="{{ path('country_list') }}">Страны</a>
-      <a class="dropdown-item" href="{{ path('language_list') }}">Языки</a>
-      <a class="dropdown-item" href="{{ path('vendor_list') }}">Вендор</a>
+      <a class="dropdown-item" href="{{ path('country_list') }}">Countries</a>
+      <a class="dropdown-item" href="{{ path('language_list') }}">Languages</a>
+      <a class="dropdown-item" href="{{ path('vendor_list') }}">Vendors</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="{{ path('platform_list') }}">Платформы</a>
-      <a class="dropdown-item" href="{{ path('clustertype_list') }}">Тип кластера</a>
-      <a class="dropdown-item" href="{{ path('cluster_list') }}">Кластер</a>      
-      <a class="dropdown-item" href="{{ path('project_list') }}">Проект</a>
-      <a class="dropdown-item" href="{{ path('os_list') }}">ОС</a>
+      <a class="dropdown-item" href="{{ path('platform_list') }}">Platforms</a>
+      <a class="dropdown-item" href="{{ path('clustertype_list') }}">Cluster types</a>
+      <a class="dropdown-item" href="{{ path('cluster_list') }}">Clusters</a>      
+      <a class="dropdown-item" href="{{ path('project_list') }}">Projects</a>
+      <a class="dropdown-item" href="{{ path('os_list') }}">OS</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="{{ path('building_list') }}">Здания</a>
-      <a class="dropdown-item" href="{{ path('room_list') }}">Комнаты</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
+      <a class="dropdown-item" href="{{ path('building_list') }}">Buildings</a>
+      <a class="dropdown-item" href="{{ path('room_list') }}">Rooms</a>
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ path('server_list') }}">Серверы</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
+    <a class="nav-link" href="{{ path('server_list') }}">Servers</a>
   </li>
 </ul>
 </nav>
@@ -57,7 +50,7 @@
 {% block footer %}
 <footer class="page-footer font-small blue">
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
     <a href="https://"> </a>
   </div>
   <!-- Copyright -->

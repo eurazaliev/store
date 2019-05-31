@@ -1,7 +1,7 @@
 {# templates/vendor/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}vendor{% endblock %}
+{% block title %}Vendors{% endblock %}
 {% block body %}
 <div class="blog-header">
     <h2 class="blog-title text-center">{{entity}}</h2>
@@ -37,15 +37,15 @@
       <td>{{ vendor.permit }}</td>
       <td>{{ vendor.countryid }}</td>
       <td>{{ vendor.memo }}</td>
-      <td><a href="{{ url('vendor_delete',{'id': vendor.id}) }} " class="db-list-edit" onclick="return confirm(' {{ vendor.name }} будет удалено, продолжить?')">Удалить {{ vendor.name }}</a></td>
+      <td><a href="{{ url('vendor_delete',{'id': vendor.id}) }} " class="db-list-edit" onclick="return confirm('Delete {{ vendor.name }}?')">Delete {{ vendor.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\VendorController::newAction')) }} 
 {% endblock %}

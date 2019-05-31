@@ -15,24 +15,24 @@ class LoadCluster extends Fixture implements DependentFixtureInterface
 	{
 		$cluster = new Cluster();
 		$cluster
-			->setName('High')
-			->setMemo('Мощный')
+			->setName('HA')
+			->setMemo('High Available Cluster')
 			->setProjectId($this->getReference('project'))
 			->setClustertypeId($this->getReference('clustertype'));
 		$manager->persist($cluster);
 		
 		$cluster2 = new Cluster();
 		$cluster2
-			->setName('Хилый')
-			->setMemo('')
+			->setName('TEST')
+			->setMemo('Test cluster')
 			->setProjectId($this->getReference('project2'))
 			->setClustertypeId($this->getReference('clustertype2'));
 		$manager->persist($cluster2);
 		
 		$cluster3 = new Cluster();
 		$cluster3
-			->setName('Средний')
-			->setMemo('HA кластер')
+			->setName('Secondary')
+			->setMemo('Disaster recover cluster')
 			->setProjectId($this->getReference('project3'))
 			->setClustertypeId($this->getReference('clustertype3'));
 

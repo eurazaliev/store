@@ -33,15 +33,15 @@
       <th scope="row">{{ clustertype.id }}</th>
       <td><a href="{{ url('clustertype_edit',{'id': clustertype.id}) }}" class="db-list-edit"> {{ clustertype.name }}</a></td>
       <td>{{ clustertype.memo }}</td>
-      <td><a href="{{ url('clustertype_delete',{'id': clustertype.id}) }}" class="db-list-edit" onclick="return confirm(' {{ clustertype.name }} будет удалено, продолжить?')">Удалить {{ clustertype.name }}</a></td>
+      <td><a href="{{ url('clustertype_delete',{'id': clustertype.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ clustertype.name }}?')">Delete {{ clustertype.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\ClustertypeController::newAction')) }} 
 {% endblock %}

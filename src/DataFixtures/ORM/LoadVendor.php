@@ -31,9 +31,9 @@ class LoadVendor extends Fixture implements DependentFixtureInterface
 		
 		$vendor3 = new Vendor();
 		$vendor3
-			->setName('Депо')
+			->setName('UTC')
 			->setPermit(1)
-			->setMemo('Депо компутерз')
+			->setMemo('Ultimete Trading Company')
 			->setCountryId($this->getReference('country3'));
 		$manager->persist($vendor3);
 		$manager->flush();		

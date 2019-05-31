@@ -14,20 +14,20 @@ class LoadLanguage extends Fixture
 	{
 		$language = new Language();
 		$language
-			->setName('RUS')
-			->setMemo('Русский');
+			->setName('FIN')
+			->setMemo('Finnish');
 		$manager->persist($language);
 		
 		$language2 = new Language();
 		$language2
 			->setName('ENG')
-			->setMemo('Английский');
+			->setMemo('English');
 		$manager->persist($language2);
 		
 		$language3 = new Language();
 		$language3
 			->setName('CN')
-			->setMemo('Китайский');
+			->setMemo('China');
 		$manager->persist($language3);
 		$manager->flush();		
 

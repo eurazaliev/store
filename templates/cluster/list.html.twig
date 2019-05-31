@@ -37,15 +37,15 @@
       <td>{{ cluster.projectid }}</td>
       <td>{{ cluster.clustertypeid }}</td>
       <td>{{ cluster.memo }}</td>
-      <td><a href="{{ url('cluster_delete',{'id': cluster.id}) }} " class="db-list-edit" onclick="return confirm(' {{ cluster.name }} будет удалено, продолжить?')">Удалить {{ cluster.name }}</a></td>
+      <td><a href="{{ url('cluster_delete',{'id': cluster.id}) }} " class="db-list-edit" onclick="return confirm('Delete {{ cluster.name }}?')">Delete {{ cluster.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Submit</h3>
 {{ render(controller('App\\Controller\\ClusterController::newAction')) }} 
 {% endblock %}

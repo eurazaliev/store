@@ -1,7 +1,7 @@
 {# templates/Country/country_index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Страны{% endblock %}
+{% block title %}Countries{% endblock %}
 {% block body %}
 <div class="blog-header">
     <h2 class="blog-title text-center">{{entity}}</h2>
@@ -35,15 +35,15 @@
       <td><a href="{{ url('country_edit',{'id': country.id}) }}" class="db-list-edit"> {{ country.name }}</a></td>
       <td>{{ country.sactions }}</td>
       <td>{{ country.memo }}</td>
-      <td><a href="{{ url('country_delete',{'id': country.id}) }}" class="db-list-edit" onclick="return confirm(' {{ country.name }} будет удалено, продолжить?')">Удалить {{ country.name }}</a></td>
+      <td><a href="{{ url('country_delete',{'id': country.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ country.name }}?')">Delete {{ country.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить страну</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\CountryController::newAction')) }} 
 {% endblock %}

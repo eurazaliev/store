@@ -14,27 +14,27 @@ class LoadBuilding extends Fixture
 	{
 		$building = new Building();
 		$building
-			->setName('Главный офис')
-			->setCity('Default City')
-			->setAddress('Невский, 45')
-			->setMemo('Тут все');
+			->setName('Hot Lake')
+			->setCity('Paris')
+			->setAddress('Gurnet st. 45')
+			->setMemo('Hot Lake Business Center');
 		$manager->persist($building);
 		
 		$building2 = new Building();
 		$building2
-			->setName('Второй офис')
-			->setCity('Default City')
-			->setAddress('Проспект, 45')
-			->setMemo('Тут бэкофис');
+			->setName('Vem 9')
+			->setCity('Horf')
+			->setAddress('Beaver sq. 43/4')
+			->setMemo('Sofrware development dept');
 
 		$manager->persist($building2);
 		
 		$building3 = new Building();
 		$building3
-			->setName('Офис продаж')
-			->setCity('City Москва')
-			->setAddress('Красная площадь, 45')
-			->setMemo('Тут продают');
+			->setName('Sales Center')
+			->setCity('Hederberg')
+			->setAddress('Red lights st. 119')
+			->setMemo('Sales Department');
 		$manager->persist($building3);
 		$manager->flush();		
 

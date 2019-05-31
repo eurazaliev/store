@@ -1,7 +1,7 @@
 {# templates/project/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Языки{% endblock %}
+{% block title %}Projects{% endblock %}
 {% block body %}
 <div class="blog-header">
     <h2 class="blog-title text-center">{{entity}}</h2>
@@ -33,15 +33,15 @@
       <th scope="row">{{ project.id }}</th>
       <td><a href="{{ url('project_edit',{'id': project.id}) }}" class="db-list-edit"> {{ project.name }}</a></td>
       <td>{{ project.memo }}</td>
-      <td><a href="{{ url('project_delete',{'id': project.id}) }}" class="db-list-edit" onclick="return confirm(' {{ project.name }} будет удалено, продолжить?')">Удалить {{ project.name }}</a></td>
+      <td><a href="{{ url('project_delete',{'id': project.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ project.name }}?')">Delete {{ project.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\ProjectController::newAction')) }} 
 {% endblock %}

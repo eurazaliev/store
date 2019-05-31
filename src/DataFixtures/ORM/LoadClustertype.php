@@ -14,14 +14,14 @@ class LoadClustertype extends Fixture
 	{
 		$clustertype = new Clustertype();
 		$clustertype
-			->setName('vmware')
-			->setMemo('еще пользуемся');
+			->setName('BTSoft')
+			->setMemo('BT sotfware cluster solution');
 		$manager->persist($clustertype);
 		
 		$clustertype2 = new Clustertype();
 		$clustertype2
-			->setName('hyper-v')
-			->setMemo('64 bitochka');
+			->setName('VIRT-B')
+			->setMemo('Cloud virtual machines');
 		$manager->persist($clustertype2);
 		
 		$clustertype3 = new Clustertype();

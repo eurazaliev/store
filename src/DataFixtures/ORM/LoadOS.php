@@ -15,7 +15,7 @@ class LoadOS extends Fixture implements DependentFixtureInterface
 	{
 		$os = new Os();
 		$os
-			->setName('HP UX')
+			->setName('DF UX')
 			->setVersion('11.1')
 			->setPlatformID($this->getReference('platform1'))
 			->setVendorID($this->getReference('vendor1'))
@@ -25,8 +25,8 @@ class LoadOS extends Fixture implements DependentFixtureInterface
 		
 		$os2 = new Os();
 		$os2
-			->setName('Windows Server')
-			->setVersion('2016')
+			->setName('Window Platform')
+			->setVersion('16')
 			->setPlatformID($this->getReference('platform2'))
 			->setVendorID($this->getReference('vendor2'))
 			->setLanguageID($this->getReference('language2'))
@@ -35,7 +35,7 @@ class LoadOS extends Fixture implements DependentFixtureInterface
 		
 		$os3 = new Os();
 		$os3
-			->setName('ROSA ENTERPRISE LINUX SERVER')
+			->setName('OPN ENTERPRISE LINUX SERVER')
 			->setVersion('7')
 			->setPlatformID($this->getReference('platform3'))
 			->setVendorID($this->getReference('vendor3'))
@@ -55,8 +55,8 @@ class LoadOS extends Fixture implements DependentFixtureInterface
 
 		$os5 = new Os();
 		$os5
-			->setName('Windows server')
-			->setVersion('2012 R2')
+			->setName('Window Platform')
+			->setVersion('12 V3')
 			->setPlatformID($this->getReference('platform1'))
 			->setVendorID($this->getReference('vendor2'))
 			->setLanguageID($this->getReference('language3'))

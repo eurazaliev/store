@@ -14,23 +14,23 @@ class LoadCountry extends Fixture
 	{
 		$country = new Country();
 		$country
-			->setName('Россия')
+			->setName('Finland')
 			->setSactions(0)
-			->setMemo('Россия, великая наша держава!');
+			->setMemo('FIN');
 		$manager->persist($country);
 		
 		$country2 = new Country();
 		$country2
-			->setName('Китай')
+			->setName('China')
 			->setSactions(0)
-			->setMemo('Китайцы');
+			->setMemo('C');
 		$manager->persist($country2);
 		
 		$country3 = new Country();
 		$country3
-			->setName('Великобритания')
+			->setName('GER')
 			->setSactions(1)
-			->setMemo('Британцы ну там англичане, шотландцы ирландцы и все такие');
+			->setMemo('Germany');
 		$manager->persist($country3);
 		$manager->flush();		
 

@@ -35,15 +35,15 @@
       <td><a href="{{ url('room_edit',{'id': room.id}) }}" class="db-list-edit"> {{ room.name }}</a></td>
       <td>{{ room.buildingid }}</td>
       <td>{{ room.memo }}</td>
-      <td><a href="{{ url('room_delete',{'id': room.id}) }} " class="db-list-edit" onclick="return confirm(' {{ room.name }} будет удалено, продолжить?')">Удалить {{ room.name }}</a></td>
+      <td><a href="{{ url('room_delete',{'id': room.id}) }} " class="db-list-edit" onclick="return confirm('Delete {{ room.name }}?')">Delete {{ room.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\RoomController::newAction')) }} 
 {% endblock %}

@@ -14,22 +14,22 @@ class LoadRoom extends Fixture
 	{
 		$room = new Room();
 		$room
-			->setName('127')
-			->setMemo('Второй этаж')
+			->setName('DataCenter')
+			->setMemo('Main datacenter')
 			->setBuildingId($this->getReference('building'));
 		$manager->persist($room);
 		
 		$room2 = new Room();
 		$room2
-			->setName('Гардероб')
-			->setMemo('Разденься')
+			->setName('Room #21')
+			->setMemo('Second floor server room')
 			->setBuildingId($this->getReference('building2'));
 		$manager->persist($room2);
 		
 		$room3 = new Room();
 		$room3
-			->setName('345а')
-			->setMemo('Переговорная')
+			->setName('B17')
+			->setMemo('Secondary Datacenter')
 			->setBuildingId($this->getReference('building3'));
 		$manager->persist($room3);
 		$manager->flush();		

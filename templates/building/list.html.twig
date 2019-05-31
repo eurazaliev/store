@@ -38,11 +38,11 @@
       <td>{{ building.address }}</td>
       <td>{{ building.memo }}</td>
 
-      <td><a href="{{ url('building_delete',{'id': building.id}) }}" class="db-list-edit" onclick="return confirm(' {{ building.name }} будет удалено, продолжить?')">Удалить {{ building.name }}</a></td>
+      <td><a href="{{ url('building_delete',{'id': building.id}) }}" class="db-list-edit" onclick="return confirm('Delete {{ building.name }}?')">Delete{{ building.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
   <tbody>
   </tbody>

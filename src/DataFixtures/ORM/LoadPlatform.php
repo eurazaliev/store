@@ -15,19 +15,19 @@ class LoadPlatform extends Fixture
 		$platform = new Platform();
 		$platform
 			->setName('x86')
-			->setMemo('еще пользуемся');
+			->setMemo('32 bit');
 		$manager->persist($platform);
 		
 		$platform2 = new Platform();
 		$platform2
 			->setName('x64')
-			->setMemo('64 bitochka');
+			->setMemo('64 bit');
 		$manager->persist($platform2);
 		
 		$platform3 = new Platform();
 		$platform3
-			->setName('Alpha')
-			->setMemo('DEC alpha');
+			->setName('Beta')
+			->setMemo('FGB Beta processor type');
 		$manager->persist($platform3);
 		$manager->flush();		
 

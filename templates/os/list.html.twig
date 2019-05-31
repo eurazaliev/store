@@ -41,15 +41,15 @@
       <td>{{ os.vendorid }}</td>
       <td>{{ os.languageid }}</td>
       <td>{{ os.memo }}</td>
-      <td><a href="{{ url('os_delete',{'id': os.id}) }} " class="db-list-edit" onclick="return confirm(' {{ os.name }} {{ os.version }} будет удалено, продолжить?')">Удалить {{ os.name }}</a></td>
+      <td><a href="{{ url('os_delete',{'id': os.id}) }} " class="db-list-edit" onclick="return confirm('Delete {{ os.name }} {{ os.version }}?')">Delete {{ os.name }}</a></td>
     </tr>
 
 {% else %}
-Записей нет.
+No entries.
 {% endfor %}
 
   </tbody>
 </table>
-<h3 class="text-center">Добавить</h3>
+<h3 class="text-center">Add</h3>
 {{ render(controller('App\\Controller\\OSController::newAction')) }} 
 {% endblock %}
